@@ -6,18 +6,25 @@ var Records = React.createClass({
 	getDefaultProps: function() {
     return { records: [] };
   },
+
+  addRecord: function(record){
+  	var records = React.addons.update(this.state.records, { $push: [record] })
+  	this.setState({ records: records });
+  },
 	
 	// Renders the entire component
   render: function() {
   	return (
   		<div className="records">
   			<h2 className="title">Records</h2>
+  			<RecordForm handleNewRecord={this.addRecord} />
 	  		<table className="table table-bordered">
 	  			<thead>
 	  				<tr>
 	  					<th>Date</th>
 	  					<th>Title</th>
 	  					<th>Amount</th>
+	  					<th>Actions</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
@@ -27,6 +34,6 @@ var Records = React.createClass({
 	  			</tbody>
 	  		</table>
 	  	</div>
-  	)
+  	);
   }
 });

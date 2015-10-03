@@ -16,7 +16,7 @@ class RecordsController < ApplicationController
 			# render new record data
 			render json: @record
 		else
-			render json: @record.errors, status :unprocessable_entity
+			render json: @record.errors, status: :unprocessable_entity
 		end
 	end 
 
