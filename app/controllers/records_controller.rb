@@ -1,4 +1,5 @@
 class RecordsController < ApplicationController
+	before_action :current_record, only: [:destroy]
 
 	def index
 		# Render all records and store in @records
@@ -20,7 +21,7 @@ class RecordsController < ApplicationController
 		end
 	end 
 
-	def delete
+	def destroy
 		@record.destroy
 		head :no_content
 	end
