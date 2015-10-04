@@ -1,3 +1,3 @@
 var amountFormat  = function(amount) {
-	'$' + Number(amount).toLocaleString();
+	return '$' + Number(amount).toLocaleString();
 }
