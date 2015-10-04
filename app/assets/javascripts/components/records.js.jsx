@@ -12,6 +12,12 @@ var Records = React.createClass({
   	this.setState({ records: records });
   },
 
+  deleteRecord: function(record){
+  	var index = this.state.records.indexOf(record);
+  	var records = React.addons.update(this.state.records, { $splice: [[index, 1]] });
+  	this.replaceState({ records: records });
+  },
+
   credits: function(){
   	// Create credits from the components instance of records which is filtered by.....
   	var credits = this.state.records.filter(function(val){
@@ -64,7 +70,7 @@ var Records = React.createClass({
 	  			</thead>
 	  			<tbody>
 	  				{this.state.records.map(function(record){
-	  					return <Record key={record.id} record={record}/>
+	  					return <Record key={record.id} record={record} handleDeleteRecord={this.deleteRecord}/>
 	  				}.bind(this))}
 	  			</tbody>
 	  		</table>

@@ -20,10 +20,19 @@ class RecordsController < ApplicationController
 		end
 	end 
 
+	def delete
+		@record.destroy
+		head :no_content
+	end
+
 	private
 
 	def record_params
 		# title, amount and date consist within a record
 		params.require(:record).permit(:title, :amount, :date)
+	end
+
+	def current_record
+		@record = Record.find(params[:id])
 	end
 end
