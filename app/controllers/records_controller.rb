@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-	before_action :current_record, only: [:destroy, :edit]
+	before_action :current_record, only: [:destroy, :update]
 
 	def index
 		# Render all records and store in @records
@@ -8,7 +8,6 @@ class RecordsController < ApplicationController
 
 	# Method for Record Creation
 	def create
-
 		# create a new Record, using record_params
 		@record = Record.new(record_params)
 
@@ -20,6 +19,15 @@ class RecordsController < ApplicationController
 			render json: @record.errors, status: :unprocessable_entity
 		end
 	end 
+
+	def update
+		@record = Record.find(params[:id])
+		if @record.update(record_params)
+			render json: @record
+		else
+			render json: @record.errors, status: :unprocessable_entity
+		end
+	end
 
 	def destroy
 		@record.destroy

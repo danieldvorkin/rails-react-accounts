@@ -22,6 +22,7 @@ var Record = React.createClass({
 
   handleEdit: function(e){
     e.preventDefault();
+    //Retrieving the dom node elements by ref and creating a data object to hold the key value pairs
     var data = { title: React.findDOMNode(this.refs.title).value,
                  date: React.findDOMNode(this.refs.date).value,
                  amount: React.findDOMNode(this.refs.amount).value }
