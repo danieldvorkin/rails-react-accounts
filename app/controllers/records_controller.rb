@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-	before_action :current_record, only: [:destroy]
+	before_action :current_record, only: [:destroy, :edit]
 
 	def index
 		# Render all records and store in @records

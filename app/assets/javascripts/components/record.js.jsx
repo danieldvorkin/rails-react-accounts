@@ -20,6 +20,23 @@ var Record = React.createClass({
     });
   },
 
+  handleEdit: function(e){
+    e.preventDefault();
+    var data = { title: React.findDOMNode(this.refs.title).value,
+                 date: React.findDOMNode(this.refs.date).value,
+                 amount: React.findDOMNode(this.refs.amount).value }
+    $.ajax({
+      method: 'PUT',
+      url: '/records/' + this.props.record.id,
+      dataType: 'JSON',
+      data: { record: data },
+      success: function(data){
+        this.setState({ edit: false });
+        this.props.handleEditRecord(this.props.record, data);
+      }.bind(this)
+    });
+  },
+
   recordRow: function(){
     return (
       <tr>
@@ -27,7 +44,7 @@ var Record = React.createClass({
         <td>{this.props.record.title}</td>
         <td>{amountFormat(this.props.record.amount)}</td>
         <td>
-          <a className="btn btn-default" onClick={this.handleEdit}>
+          <a className="btn btn-default" onClick={this.handleToggle}>
             edit
           </a>
           <a className="btn btn-danger" onClick={this.handleDelete}>
@@ -55,6 +72,14 @@ var Record = React.createClass({
           <input className='form-control' type='number'
             defaultValue={this.props.record.amount} ref='amount'>
           </input>
+        </td>
+        <td>
+          <a className='btn btn-default' onClick={this.handleEdit}>
+            Update
+          </a>
+          <a className='btn btn-danger' onClick={this.handleToggle}>
+            Cancel
+          </a>
         </td>
       </tr>
     );
